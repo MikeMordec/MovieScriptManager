@@ -1,0 +1,108 @@
+print ("Michael Mordec, 6/28/22, Lab 8, CSC 242:")
+
+class MovieScript(object) :
+    # begin the class definition
+
+    # declare a data element as a list
+    script = []
+    timings = []
+    director = []
+    flips = []
+
+    # the class constructor
+    def __init__(self,s,t,d,f) :
+        # pass
+        print ("a class object has been constructed\n")
+        self.script = s
+        self.timings=t
+        self.director=d
+        self.flips=f
+        for flip in self.flips:
+            temp = self.script[flip[0]]
+            self.script[flip[0]]=self.script[flip[1]]
+            self.script[flip[1]] = temp
+            temp = self.timings[flip[0]]
+            self.timings[flip[0]]=self.timings[flip[1]]
+            self.timings[flip[1]] = temp
+            temp = self.director[flip[0]]
+            self.director[flip[0]]=self.director[flip[1]]
+            self.director[flip[1]] = temp
+            
+    # a class member function
+    def getScript(self) :
+        return self.script
+        
+    # a class member function
+    def setScript(self, s) :
+        self.script = s
+
+    def getTimings(self):
+        return self.timings
+
+    def setTimings(self,t):
+        self.timings = t
+
+    def getDirectors(self):
+        return self.director
+
+    # end the class definition
+
+# the movie text and sequences
+seq = []
+seq.append("opening teaser sequence")
+seq.append("subplot: enemy gets away with briefcase in hot air baloon")
+seq.append("main titles with theme song")
+seq.append("the plot unfolds")
+seq.append("meeting with the superiors")
+seq.append("subplot: agent M gives backstory")
+seq.append("the gadgets are issued (car chase first half)")
+seq.append("the mission begins (car chase second half)")
+seq.append("a romance ensues")
+seq.append("thwarted but persistent")
+seq.append("subplot: hero ecapse laser table")
+seq.append("physical confrontation with the enemy")
+seq.append("the enemy is defeated")
+seq.append("the loose ends unfold")
+seq.append("on to the next mission")
+
+timings = []
+t = 0
+for ss in seq:
+    timings.append(t)
+    t = t + 7
+
+director = ['Bob','Sue','Bob','Sue','Sue','Bob','Bob',
+'Bob','Sue','Bob','Sue','Sue','Bob','Bob','Bob']
+
+flips = [(8,9)]
+
+# convert the sequence list to a dictionary
+
+# create a new movie script object
+ms = MovieScript(seq,timings,director,flips)
+theScript = ms.getScript()
+theTime = ms.getTimings()
+theDir = ms.getDirectors()
+for x in range(len(theScript)) :
+    print (u"\u2022", theDir[x] + " " + theScript[x],"("+ str(theTime[x]) +")", end = "\n")
+print ("\n")
+
+print ("please enter a keyword to search the movie sequences")
+print ("\n")
+keywords = ['enemy','gadgets','mission']
+i=1
+for keyword in keywords:
+    print(str(i)+")",keyword)
+    i = i + 1
+print("----------------")
+keywordIndex = int(input().strip())
+keyword = keywords[keywordIndex-1]
+
+for i in range(len(seq)) :
+    if (keyword in seq[i]) :
+        print ("[keyword(s) found]")
+        print ("in scene sequence number", i + 1)
+        print ("\"", seq[i], "\"")
+print ("\n")
+
+
